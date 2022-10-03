@@ -1,0 +1,12 @@
+.navBar { 
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navLinks { 
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
