@@ -1,0 +1,12 @@
+.logInModule { 
+  display: none;
+}
+
+.logInModule-show { 
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 8px;
+  height: 50vw;
+  width: 25vw;
+}
