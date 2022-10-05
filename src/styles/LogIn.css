@@ -10,3 +10,11 @@
   height: 50vw;
   width: 25vw;
 }
+
+.logOut { 
+  display: none;
+}
+
+.logOut-show { 
+  display: block;
+}
