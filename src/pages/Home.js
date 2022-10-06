@@ -8,8 +8,6 @@ import LogIn from "../components/LogIn";
 const Home = () => { 
   return (
     <div className="containerHome">
-      <Nav/>
-      <LogIn />
       <MainBody/>
       <Footer/>
     </div>

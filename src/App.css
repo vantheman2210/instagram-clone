@@ -1,1 +1,1 @@
-body, #root { min-height: 100vh; }
+body, #root, .containerApp { min-height: 100vh; }

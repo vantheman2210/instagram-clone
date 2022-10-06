@@ -14,7 +14,12 @@ const Nav = () => {
         <Link to="/">
         <li>Home</li>
         </Link>
-        <li onClick={clickLogIn}>Log In</li>
+        <Link to="logIn">
+        <li>Log In</li>
+        </Link>
+        <Link to="signUp">
+        <li>Sign Up</li>
+        </Link>
       </ul>
     </nav>
   )
