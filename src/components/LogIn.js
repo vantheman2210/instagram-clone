@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/LogIn.css';
 import { auth, provider } from '../Firebase';
-import { signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 
 const LogIn = () => {
-	const signOut = () => {
-		auth.signOut();
-		document.querySelector('.logOut').classList.toggle('logOut-show');
-		console.log('Signed out');
+	const [ logIn, setLogIn ] = useState({
+		email: '',
+		password: ''
+	});
+	const handleChange = (e) => {
+		const value = e.target.value;
+
+		setLogIn({
+			...logIn,
+			[e.target.name]: value
+		});
 	};
+
 	const signInGoogle = () => {
 		signInWithPopup(auth, provider)
 			.then((result) => {
@@ -33,13 +41,42 @@ const LogIn = () => {
 				// ...
 			});
 	};
+
+	const onSubmit = (e) => {
+		e.preventDefault();
+		signInWithEmailAndPassword(auth, logIn.email, logIn.password)
+			.then((userCredential) => {
+				// Signed in
+				const user = userCredential.user;
+				// ...
+				console.log(user);
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				console.log(errorCode, errorMessage);
+			});
+	};
+
+	const signOut = () => {
+		auth.signOut();
+		document.querySelector('.logOut').classList.toggle('logOut-show');
+		console.log('Signed out');
+	};
 	return (
 		<div className="logInModule">
-			<p onClick={signInGoogle}>Google</p>
+			<button onClick={signInGoogle}>Log in with Google</button>
+			<form onSubmit={onSubmit}>
+				<input placeholder="username" value={logIn.email} onChange={handleChange} />
+				<input placeholder="password" value={logIn.password} onChange={handleChange} />
+				<input type="submit" />
+			</form>
 			<Link to="/signUp">
-			<p>Sign up</p>
+				<p>Sign up</p>
 			</Link>
-			<p className='logOut' onClick={signOut}>Log out</p>
+			<p className="logOut" onClick={signOut}>
+				Log out
+			</p>
 		</div>
 	);
 };
