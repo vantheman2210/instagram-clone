@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../styles/LogIn.css';
 import { auth, provider } from '../Firebase';
-import { signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 
 const LogIn = () => {
@@ -22,8 +22,8 @@ const LogIn = () => {
 		signInWithPopup(auth, provider)
 			.then((result) => {
 				// This gives you a Google Access Token. You can use it to access the Google API.
-				const credential = GoogleAuthProvider.credentialFromResult(result);
-				const token = credential.accessToken;
+				//const credential = GoogleAuthProvider.credentialFromResult(result);
+				//const token = credential.accessToken;
 				// The signed-in user info.
 				const user = result.user;
 				console.log(user);
@@ -32,12 +32,12 @@ const LogIn = () => {
 			})
 			.catch((error) => {
 				// Handle Errors here.
-				const errorCode = error.code;
-				const errorMessage = error.message;
+				//const errorCode = error.code;
+				//const errorMessage = error.message;
 				// The email of the user's account used.
-				const email = error.customData.email;
+				//const email = error.customData.email;
 				// The AuthCredential type that was used.
-				const credential = GoogleAuthProvider.credentialFromError(error);
+				//const credential = GoogleAuthProvider.credentialFromError(error);
 				// ...
 			});
 	};
@@ -50,6 +50,10 @@ const LogIn = () => {
 				const user = userCredential.user;
 				// ...
 				console.log(user);
+				setLogIn({
+					email: '',
+					password: ''
+				});
 			})
 			.catch((error) => {
 				const errorCode = error.code;
@@ -66,10 +70,10 @@ const LogIn = () => {
 	return (
 		<div className="logInModule">
 			<button onClick={signInGoogle}>Log in with Google</button>
-			<form onSubmit={onSubmit}>
-				<input placeholder="username" value={logIn.email} onChange={handleChange} />
-				<input placeholder="password" value={logIn.password} onChange={handleChange} />
-				<input type="submit" />
+			<form onSubmit={onSubmit} id="logInForm">
+				<input name="email" placeholder="username" value={logIn.email} onChange={handleChange} />
+				<input name="password" placeholder="password" value={logIn.password} onChange={handleChange} />
+				<input type="submit" value="Log in"/>
 			</form>
 			<Link to="/signUp">
 				<p>Sign up</p>

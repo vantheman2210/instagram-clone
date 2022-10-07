@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import '../styles/SignUp.css';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../Firebase';
+import { auth, provider } from '../Firebase';
+import { signInWithPopup } from 'firebase/auth';
+
 const SignUp = () => {
 	const [ signUp, setSignUp ] = useState({
 		username: '',
@@ -14,32 +16,59 @@ const SignUp = () => {
 		setSignUp({
 			...signUp,
 			[e.target.name]: value
-		})
-	}; 
+		});
+	};
 
-	const submitForm = (e) => { 
+	const submitForm = (e) => {
 		e.preventDefault();
 		createUserWithEmailAndPassword(auth, signUp.email, signUp.password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-		console.log(user)
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-		console.log(errorCode, errorMessage)
-  });
-	} 
+			.then((userCredential) => {
+				// Signed in
+				const user = userCredential.user;
+				// ...
+				console.log(user);
+				setSignUp({
+					username: '',
+					email: '',
+					password: ''
+				});
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				// ..
+				console.log(errorCode, errorMessage);
+			});
+	};
 
+	const signUpGoogle = () => {
+		signInWithPopup(auth, provider)
+			.then((result) => {
+				// This gives you a Google Access Token. You can use it to access the Google API.
+				//const credential = GoogleAuthProvider.credentialFromResult(result);
+				//const token = credential.accessToken;
+				// The signed-in user info.
+				const user = result.user;
+				console.log(user);
+				document.querySelector('.logOut').classList.toggle('logOut-show');
+				// ...
+			})
+			.catch((error) => {
+				// Handle Errors here.
+				//const errorCode = error.code;
+				//const errorMessage = error.message;
+				// The email of the user's account used.
+				//const email = error.customData.email;
+				// The AuthCredential type that was used.
+				//const credential = GoogleAuthProvider.credentialFromError(error);
+				// ...
+			});
+	};
 
-	
 	return (
 		<div className="signUp-container">
 			<div className="signUp-options">
-				<p>Log in with Google</p>
+				<p onClick={signUpGoogle}>Sign up with Google</p>
 				<p>OR</p>
 				<form onSubmit={submitForm} className="signUp-form">
 					<input name="username" placeholder="Username" onChange={handleChange} value={signUp.username} />
@@ -48,7 +77,7 @@ const SignUp = () => {
 
 					<input name="password" placeholder="Password" onChange={handleChange} value={signUp.password} />
 
-					<input type="submit" />
+					<input type="submit" value="Sign up"/>
 				</form>
 				<p className="signUp-terms">
 					By signing up, you agree to our Terms , Privacy Policy and Cookies Policy .

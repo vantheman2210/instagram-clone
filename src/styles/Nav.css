@@ -10,3 +10,18 @@
   flex-direction: row;
   gap: 1rem;
 }
+
+.userNav { 
+  display: none;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userNav-show { 
+  display: flex;
+}
+
+.navBar-hide { 
+  display: none;
+}
