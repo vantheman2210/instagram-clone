@@ -8,6 +8,7 @@ const UserNav = () => {
 		document.querySelector('.logOut').classList.toggle('logOut-show');
 		document.querySelector('.userNav').classList.toggle('userNav-show');
 		document.querySelector('.navBar').classList.toggle('navBar-hide');
+    document.querySelector('.logInModule').classList.toggle('logInModule-hide');
 		console.log('Signed out');
 	};
 	return (
@@ -17,7 +18,7 @@ const UserNav = () => {
 				<Link to="/">
 					<li>Home</li>
 				</Link>
-				<Link to="messages">
+				<Link to="/">
 					<li>Messages</li>
 				</Link>
 				<Link to="user">
@@ -32,7 +33,7 @@ const UserNav = () => {
 						</div>
 					</li>
 				</Link>
-				<li onClick={signOut}>Log out</li>
+				<li className='logOut' onClick={signOut}>Log out</li>
 			</ul>
 		</nav>
 	);

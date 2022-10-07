@@ -15,3 +15,7 @@
 .logOut-show { 
   display: block;
 }
+
+.logInModule-hide { 
+  display: none;
+}

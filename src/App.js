@@ -21,10 +21,10 @@ function App() {
 			document.querySelector('.logOut').classList.toggle('logOut-show');
 			document.querySelector('.userNav').classList.toggle('userNav-show');
 			document.querySelector('.navBar').classList.toggle('navBar-hide');
+			document.querySelector('.logInModule').classList.toggle('logInModule-hide');
 		} else {
 			// No user is signed in.
 			console.log('signed out');
-		
 		}
 	});
 	return (

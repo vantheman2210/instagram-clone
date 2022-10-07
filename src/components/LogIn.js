@@ -67,6 +67,7 @@ const LogIn = () => {
 		document.querySelector('.logOut').classList.toggle('logOut-show');
 		document.querySelector('.userNav').classList.toggle('userNav-show');
 		document.querySelector('.navBar').classList.toggle('navBar-hide');
+		document.querySelector('.logInModule').classList.toggle('logInModule-hide');
 		console.log('Signed out');
 	};
 	return (
