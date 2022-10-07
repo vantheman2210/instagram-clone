@@ -21,7 +21,16 @@ const UserNav = () => {
 					<li>Messages</li>
 				</Link>
 				<Link to="user">
-					<li>User</li>
+					<li>
+						<div class="dropdown">
+							<button class="dropbtn">Dropdown</button>
+							<div class="dropdown-content">
+								<p>Link 1</p>
+								<p>Link 2</p>
+								<p>Link 3</p>
+							</div>
+						</div>
+					</li>
 				</Link>
 				<li onClick={signOut}>Log out</li>
 			</ul>
