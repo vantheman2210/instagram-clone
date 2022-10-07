@@ -8,7 +8,7 @@ const UserNav = () => {
 		document.querySelector('.logOut').classList.toggle('logOut-show');
 		document.querySelector('.userNav').classList.toggle('userNav-show');
 		document.querySelector('.navBar').classList.toggle('navBar-hide');
-    document.querySelector('.logInModule').classList.toggle('logInModule-hide');
+		document.querySelector('.logInModule').classList.toggle('logInModule-hide');
 		console.log('Signed out');
 	};
 	return (
@@ -21,19 +21,22 @@ const UserNav = () => {
 				<Link to="/">
 					<li>Messages</li>
 				</Link>
-				<Link to="user">
-					<li>
-						<div className="dropdown">
-							<button className="dropbtn">Dropdown</button>
-							<div className="dropdown-content">
-								<p>Link 1</p>
-								<p>Link 2</p>
-								<p>Link 3</p>
-							</div>
+				<li>
+					<div className="dropdown">
+						<button className="dropbtn">Dropdown</button>
+						<div className="dropdown-content">
+              <Link to="/userProfile">
+							<p>Profile</p>
+              </Link>
+              <Link to="accountSettings">
+							<p>Account settings</p>
+              </Link>
+							<p className="logOut" onClick={signOut}>
+								Log Out
+							</p>
 						</div>
-					</li>
-				</Link>
-				<li className='logOut' onClick={signOut}>Log out</li>
+					</div>
+				</li>
 			</ul>
 		</nav>
 	);

@@ -4,12 +4,17 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, provider } from '../Firebase';
 import { signInWithPopup } from 'firebase/auth';
 
+import { useNavigate } from 'react-router-dom';
+
 const SignUp = () => {
 	const [ signUp, setSignUp ] = useState({
 		username: '',
 		email: '',
 		password: ''
 	});
+
+	const navigate = useNavigate();
+
 	const handleChange = (e) => {
 		const value = e.target.value;
 
@@ -24,6 +29,7 @@ const SignUp = () => {
 		createUserWithEmailAndPassword(auth, signUp.email, signUp.password)
 			.then((userCredential) => {
 				// Signed in
+				navigate("/")
 				const user = userCredential.user;
 				// ...
 				console.log(user);
@@ -49,6 +55,7 @@ const SignUp = () => {
 				//const token = credential.accessToken;
 				// The signed-in user info.
 				const user = result.user;
+				navigate("/")
 				console.log(user);
 				document.querySelector('.logOut').classList.toggle('logOut-show');
 				// ...

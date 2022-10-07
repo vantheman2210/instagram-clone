@@ -76,7 +76,7 @@ const LogIn = () => {
 			<form onSubmit={onSubmit} id="logInForm">
 				<input name="email" placeholder="username" value={logIn.email} onChange={handleChange} />
 				<input name="password" placeholder="password" value={logIn.password} onChange={handleChange} />
-				<input type="submit" value="Log in"/>
+				<input type="submit" value="Log in" />
 			</form>
 			<Link to="/signUp">
 				<p>Sign up</p>
