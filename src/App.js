@@ -24,6 +24,7 @@ function App() {
 		} else {
 			// No user is signed in.
 			console.log('signed out');
+		
 		}
 	});
 	return (

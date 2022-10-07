@@ -22,9 +22,9 @@ const UserNav = () => {
 				</Link>
 				<Link to="user">
 					<li>
-						<div class="dropdown">
-							<button class="dropbtn">Dropdown</button>
-							<div class="dropdown-content">
+						<div className="dropdown">
+							<button className="dropbtn">Dropdown</button>
+							<div className="dropdown-content">
 								<p>Link 1</p>
 								<p>Link 2</p>
 								<p>Link 3</p>

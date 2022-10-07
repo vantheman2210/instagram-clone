@@ -65,6 +65,8 @@ const LogIn = () => {
 	const signOut = () => {
 		auth.signOut();
 		document.querySelector('.logOut').classList.toggle('logOut-show');
+		document.querySelector('.userNav').classList.toggle('userNav-show');
+		document.querySelector('.navBar').classList.toggle('navBar-hide');
 		console.log('Signed out');
 	};
 	return (
