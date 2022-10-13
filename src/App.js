@@ -14,6 +14,7 @@ import UserProfile from './pages/UserProfile';
 import UserSettings from './pages/UserSettings';
 
 function App() {
+
 	setPersistence(auth, inMemoryPersistence).then(() => {}).catch((error) => {
 		console.log(error.code, error.message);
 	});
@@ -21,7 +22,7 @@ function App() {
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			if (user) {
-				console.log(user);
+				console.log(user.uid);
 				document.querySelector('.logOut').classList.toggle('logOut-show');
 				document.querySelector('.userNav').classList.toggle('userNav-show');
 				document.querySelector('.navBar').classList.toggle('navBar-hide');

@@ -1,0 +1,12 @@
+#display-image{
+  width: 500px;
+  height: 500px;
+  border: 1px solid black;
+  background-position: center;
+  background-size: cover;
+}
+
+.addPost-container { 
+  display: flex;
+  flex-direction: column;
+}

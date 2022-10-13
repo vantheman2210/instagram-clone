@@ -1,0 +1,26 @@
+.userContainer { 
+  display: flex; 
+  flex-direction: row;
+}
+
+.userInfo { 
+  display: flex; 
+  flex-direction: row;
+} 
+
+.follower-info { 
+  display: flex; 
+  flex-direction: row;
+}
+
+.postsGrid { 
+  display: grid;
+  gap: 5px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+}
+
+.postsGrid > div > img { 
+  height: 15rem;
+  width: 15rem;
+}

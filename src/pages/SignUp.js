@@ -1,9 +1,10 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import '../styles/SignUp.css';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, provider } from '../Firebase';
 import { signInWithPopup } from 'firebase/auth';
-
+import { db } from '../Firebase';
+import { addDoc, collection } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
@@ -12,6 +13,32 @@ const SignUp = () => {
 		email: '',
 		password: ''
 	});
+
+	const createUser = async (id, username) => {
+		console.log(db);
+		console.log(collection(db, 'users'));
+		try {
+			const docRef = await addDoc(collection(db, 'users'), {
+				id: id,
+				username: username,
+				posts: {
+					post1: {
+						likes: 0,
+						comments: {
+							comment1: {
+								friend: 'friend1',
+								comment: 'hello'
+							}
+						}
+					}
+				},
+				friends: []
+			});
+			console.log('Document written with ID: ', docRef.id);
+		} catch (e) {
+			console.error('Error adding document: ', e);
+		}
+	};
 
 	const navigate = useNavigate();
 
@@ -29,10 +56,11 @@ const SignUp = () => {
 		createUserWithEmailAndPassword(auth, signUp.email, signUp.password)
 			.then((userCredential) => {
 				// Signed in
-				navigate("/")
+				navigate('/');
 				const user = userCredential.user;
 				// ...
 				console.log(user);
+				createUser(user.uid, signUp.username)
 				setSignUp({
 					username: '',
 					email: '',
@@ -55,7 +83,8 @@ const SignUp = () => {
 				//const token = credential.accessToken;
 				// The signed-in user info.
 				const user = result.user;
-				navigate("/")
+				createUser(user.uid, signUp.username)
+				navigate('/');
 				console.log(user);
 				document.querySelector('.logOut').classList.toggle('logOut-show');
 				// ...
@@ -84,7 +113,7 @@ const SignUp = () => {
 
 					<input name="password" placeholder="Password" onChange={handleChange} value={signUp.password} />
 
-					<input type="submit" value="Sign up"/>
+					<input type="submit" value="Sign up" />
 				</form>
 				<p className="signUp-terms">
 					By signing up, you agree to our Terms , Privacy Policy and Cookies Policy .

@@ -1,10 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../Firebase';
+import AddPost from './AddPost';
 
 const UserNav = () => {
+	const navigate = useNavigate();
 	const signOut = () => {
 		auth.signOut();
+		navigate('/');
 		document.querySelector('.logOut').classList.toggle('logOut-show');
 		document.querySelector('.userNav').classList.toggle('userNav-show');
 		document.querySelector('.navBar').classList.toggle('navBar-hide');
@@ -21,16 +24,18 @@ const UserNav = () => {
 				<Link to="/">
 					<li>Messages</li>
 				</Link>
+				<li><AddPost/></li>
+				<li>Likes</li>
 				<li>
 					<div className="dropdown">
-						<button className="dropbtn">Dropdown</button>
+						<button className="dropbtn">Profile portrait</button>
 						<div className="dropdown-content">
-              <Link to="/userProfile">
-							<p>Profile</p>
-              </Link>
-              <Link to="accountSettings">
-							<p>Account settings</p>
-              </Link>
+							<Link to="/userProfile">
+								<p>Profile</p>
+							</Link>
+							<Link to="accountSettings">
+								<p>Account settings</p>
+							</Link>
 							<p className="logOut" onClick={signOut}>
 								Log Out
 							</p>
