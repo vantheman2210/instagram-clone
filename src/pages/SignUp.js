@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, provider } from '../Firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { db } from '../Firebase';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, setDoc, doc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
@@ -32,8 +32,10 @@ const SignUp = () => {
 						}
 					}
 				},
-				friends: []
+				followers: [],
+				following: []
 			});
+			
 			console.log('Document written with ID: ', docRef.id);
 		} catch (e) {
 			console.error('Error adding document: ', e);

@@ -3,6 +3,7 @@ import '../styles/LogIn.css';
 import { auth, provider } from '../Firebase';
 import { signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import { Link } from 'react-router-dom';
+import { getStorage, ref, getMetadata } from 'firebase/storage';
 
 const LogIn = () => {
 	const [ logIn, setLogIn ] = useState({
