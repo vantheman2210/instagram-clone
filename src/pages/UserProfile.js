@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import '../styles/UserProfile.css';
+import { AppContext } from '../AppContext';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from '../Firebase'; 
+import uniqid from 'uniqid';
 
 const UserProfile = () => {
+
+const [ userId, posts ] = useContext(AppContext)
+
+
+
+useEffect(() => { 
+	 console.log(posts);
+}, [])
+
+
 	return (
 		<div className="user-container">
 			<div className="userInfo">
@@ -22,46 +36,20 @@ const UserProfile = () => {
 				</div>
 			</div>
 			<div className="postsGrid">
-				<div>
-					<img src={require(`../images/test-image.jpg`)} alt="user post" />
+				{posts.map((post) => { 
+					return (
+						<div key={uniqid()}>
+					<img src={post.mediaUrl} alt="user post" />
 					<div>
+						<p>{post.caption}</p>
 						<p>Likes</p>
 						<p>Share</p>
 					</div>
 					<div>Comments</div>
 				</div>
-				<div>
-					<img src={require(`../images/test-image.jpg`)} alt="user post" />
-					<div>
-						<p>Likes</p>
-						<p>Share</p>
-					</div>
-					<div>Comments</div>
-				</div>
-				<div>
-					<img src={require(`../images/test-image.jpg`)} alt="user post" />
-					<div>
-						<p>Likes</p>
-						<p>Share</p>
-					</div>
-					<div>Comments</div>
-				</div>
-				<div>
-					<img src={require(`../images/test-image.jpg`)} alt="user post" />
-					<div>
-						<p>Likes</p>
-						<p>Share</p>
-					</div>
-					<div>Comments</div>
-				</div>
-				<div>
-					<img src={require(`../images/test-image.jpg`)} alt="user post" />
-					<div>
-						<p>Likes</p>
-						<p>Share</p>
-					</div>
-					<div>Comments</div>
-				</div>
+					)
+				})}
+				
 			</div>
 		</div>
 	);

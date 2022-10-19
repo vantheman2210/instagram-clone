@@ -3,14 +3,14 @@ import { AppContext } from '../AppContext';
 import '../styles/AddPost.css';
 import { storage, db } from '../Firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { doc, setDoc, addDoc, collection, Timestamp } from 'firebase/firestore';
+import { doc, addDoc, collection, Timestamp } from 'firebase/firestore';
 import uniqid from 'uniqid';
 
 const AddPost = () => {
 	// Constants used to place post images in user folders in firebase
 	const [ post, setPost ] = useState('');
 	const [ caption, setCaption ] = useState('');
-	const [ userId ] = useContext(AppContext);
+	const [ userId, posts ] = useContext(AppContext);
 
 	useEffect(
 		() => {
@@ -40,6 +40,7 @@ const AddPost = () => {
 		const docRef = doc(db, 'posts', userId);
 		const colRef = collection(docRef, 'userPosts');
 
+		// Adding post doc to firebase cloud with photo url, caption, and date
 		addDoc(colRef, {
 			time: Timestamp.now().toDate(),
 			mediaUrl: await getDownloadURL(refPhoto)
@@ -53,6 +54,7 @@ const AddPost = () => {
 		});
 	};
 
+	// Caption input change
 	const postCaption = (e) => {
 		const value = e.target.value;
 
