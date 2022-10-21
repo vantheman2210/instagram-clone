@@ -14,6 +14,7 @@ const UserNav = () => {
 		document.querySelector('.logInModule').classList.toggle('logInModule-hide');
 		console.log('Signed out');
 	};
+
 	return (
 		<nav className="userNav">
 			<div>Logo</div>
@@ -21,11 +22,22 @@ const UserNav = () => {
 				<Link to="/">
 					<li>Home</li>
 				</Link>
-				<Link to="/">
+				<Link to="/messages">
 					<li>Messages</li>
 				</Link>
-				<li><AddPost/></li>
 				<li>Likes</li>
+				<button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+					Add post
+				</button>
+				<div
+					className="modal fade"
+					id="exampleModal"
+					tabIndex="-1"
+					aria-labelledby="exampleModalLabel"
+					aria-hidden="true"
+				>
+					<AddPost />
+				</div>
 				<li>
 					<div className="dropdown">
 						<button className="dropbtn">Profile portrait</button>

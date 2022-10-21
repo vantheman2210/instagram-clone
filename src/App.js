@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import UserNav from './components/UserNav';
 import UserProfile from './pages/UserProfile';
 import UserSettings from './pages/UserSettings';
+import Messages from './pages/Messages';
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
 				<Route path="/signUp" element={<SignUp />} />
 				<Route path="/userProfile" element={<UserProfile />} /> 
 				<Route path="/accountSettings" element={<UserSettings />} />
+				<Route path="/messages" element={<Messages />} />
 			</Routes>
 			<Footer />
 		</div>

@@ -52,6 +52,11 @@ const AddPost = () => {
 				}),
 			caption: caption
 		});
+
+		// Reset add post input fields after upload
+		setCaption('');
+		document.querySelector('#display-image').style.backgroundImage = `none`;
+		document.querySelector('.file').value = ``;
 	};
 
 	// Caption input change
@@ -62,7 +67,45 @@ const AddPost = () => {
 	};
 
 	return (
-		<div className="addPost-container">
+		<div className="modal-dialog modal-dialog-centered">
+			<div className="modal-content">
+				<div className="modal-header">
+					<h1 className="modal-title fs-5" id="exampleModalLabel">
+						Modal title
+					</h1>
+					<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+				</div>
+				<div className="modal-body">
+					<div id="display-image" />
+					<input type="file" id="image-input" accept="image/jpeg, image/png, image/jpg" className="file" />
+					<label>
+						<input
+							className="caption"
+							onChange={postCaption}
+							type="text"
+							name="caption"
+							placeholder="Caption"
+							value={caption}
+						/>
+					</label>
+				</div>
+				<div className="modal-footer">
+					<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
+						Close
+					</button>
+					<button type="button" className="btn btn-primary" onClick={addPhotoStorage}>
+						Add post
+					</button>
+				</div>
+			</div>
+		</div>
+	);
+};
+
+export default AddPost;
+
+/*
+	<div className="addPost-container">
 			<div id="display-image" />
 			<input type="file" id="image-input" accept="image/jpeg, image/png, image/jpg" />
 			<label>
@@ -70,7 +113,4 @@ const AddPost = () => {
 			</label>
 			<button onClick={addPhotoStorage}>Add</button>
 		</div>
-	);
-};
-
-export default AddPost;
+ */
