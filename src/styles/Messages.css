@@ -4,6 +4,11 @@
   gap: 3rem;
 }
 
+.contactsList { 
+  display: flex;
+  flex-direction: column;
+}
+
 .container {
   border: 2px solid #dedede;
   background-color: #f1f1f1;

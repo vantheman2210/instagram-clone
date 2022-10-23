@@ -18,7 +18,7 @@ export const Provider = (props) => {
 				setUserId(user.uid);
 				console.log('hello');
 				fetchPosts(user.uid);
-				getContacts();
+				getContacts(user.uid);
 			} else {
 				// User is signed out
 				// remove user id and posts
@@ -40,14 +40,14 @@ export const Provider = (props) => {
 		});
 	};
 
-	const getContacts = async () => {
-		const q = query(collection(db, 'users'), where('id', '==', userId));
+	const getContacts = async (id) => {
+		const q = query(collection(db, 'users'), where('id', '==', id));
 
 		const querySnapshot = await getDocs(q);
 		querySnapshot.forEach((doc) => {
 			// doc.data() is never undefined for query doc snapshots
-			console.log(doc.data().friends);
-			setContacts((prev) => [ ...prev, doc.data().friends ]);
+			console.log(doc.data().followers);
+			setContacts((prev) => [ ...prev, doc.data().followers ]);
 		});
 	};
 
