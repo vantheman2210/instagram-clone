@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect } from 'react';
 import { auth, db } from './Firebase';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs, query, where, onSnapshot } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 
 export const AppContext = createContext();
@@ -9,6 +9,7 @@ export const Provider = (props) => {
 	const [ userId, setUserId ] = useState();
 	const [ posts, setPosts ] = useState([]);
 	const [ contacts, setContacts ] = useState([]);
+	const [ messages, setMessages ] = useState([]);
 
 	// Checking wether user is signed in
 	useEffect(() => {
@@ -19,12 +20,14 @@ export const Provider = (props) => {
 				console.log('hello');
 				fetchPosts(user.uid);
 				getContacts(user.uid);
+				fetchMessages(user.uid);
 			} else {
 				// User is signed out
 				// remove user id and posts
 				setUserId();
 				setPosts([]);
 				setContacts([]);
+				setMessages([]);
 				console.log(user);
 			}
 		});
@@ -51,6 +54,40 @@ export const Provider = (props) => {
 		});
 	};
 
+	// Fetch messages to be able to display them on messages page
+	const fetchMessages = async (id) => {
+		const querySnapshot = await getDocs(collection(db, 'messages', id, 'chats'));
+		querySnapshot.forEach((doc) => {
+			console.log(doc.data());
+			setMessages((prev) => [ ...prev, doc.data() ]);
+		});
+	};
+
+	// Updates chat to show latest messages
+	const listenToChanges = (room) => {
+		const q = query(collection(db, 'messages', userId, `chatRoom${room}`));
+		const unsubscribe = onSnapshot(q, (querySnapshot) => {
+			const messages = [];
+			querySnapshot.forEach((doc) => {
+				messages.push(doc.data());
+			});
+			console.log(messages)
+			setMessages(messages);
+		});
+	};
+
+	const listenToPostChanges = () => { 
+		const q = query(collection(db, 'posts', userId, 'userPosts'));
+		const unsubscribe = onSnapshot(q, (querySnapshot) => {
+			const posts = [];
+			querySnapshot.forEach((doc) => {
+				posts.push(doc.data());
+			});
+			
+			setPosts(posts);
+		});
+	}
+
 	// Delete this later
 	useEffect(
 		() => {
@@ -59,5 +96,5 @@ export const Provider = (props) => {
 		[ posts ]
 	);
 
-	return <AppContext.Provider value={[ userId, posts, contacts ]}>{props.children}</AppContext.Provider>;
+	return <AppContext.Provider value={[ userId, posts, contacts, messages, listenToChanges, listenToPostChanges ]}>{props.children}</AppContext.Provider>;
 };

@@ -10,7 +10,7 @@ const AddPost = () => {
 	// Constants used to place post images in user folders in firebase
 	const [ post, setPost ] = useState('');
 	const [ caption, setCaption ] = useState('');
-	const [ userId, posts ] = useContext(AppContext);
+	const [ userId,  listenToPostChanges, posts, contacts, messages, listenToChanges, ] = useContext(AppContext);
 
 	useEffect(
 		() => {
@@ -57,6 +57,7 @@ const AddPost = () => {
 		setCaption('');
 		document.querySelector('#display-image').style.backgroundImage = `none`;
 		document.querySelector('.file').value = ``;
+		listenToPostChanges();
 	};
 
 	// Caption input change
