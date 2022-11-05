@@ -34,34 +34,34 @@ const UserProfile = () => {
 			<div className="postsGrid">
 				{posts.map((post) => {
 					return (
-						<div class="post">
-							<div class="info">
-								<div class="user">
-									<div class="profile-pic">
+						<div className="post">
+							<div className="info">
+								<div className="user">
+									<div className="profile-pic">
 										<img src="img/cover 1.png" alt="" />
 									</div>
-									<p class="username">modern_web_channel</p>
+									<p className="username">modern_web_channel</p>
 								</div>
-								<img src="img/option.PNG" class="options" alt="" />
+								<img src="img/option.PNG" className="options" alt="" />
 							</div>
-							<img src={post.mediaUrl} class="post-image" alt="" />
-							<div class="post-content">
-								<div class="reaction-wrapper">
-									<img src="img/like.PNG" class="icon" alt="" />
-									<img src="img/comment.PNG" class="icon" alt="" />
-									<img src="img/send.PNG" class="icon" alt="" />
-									<img src="img/save.PNG" class="save icon" alt="" />
+							<img src={post.mediaUrl} className="post-image" alt="" />
+							<div className="post-content">
+								<div className="reaction-wrapper">
+									<img src={require("../images/like.png")} className="icon" alt="" />
+									<img src={require("../images/chat.png")} className="icon" alt="" />
+									<img src={require("../images/send.png")} className="icon" alt="" />
+									<img src={require("../images/save.png")} className="save icon" alt="" />
 								</div>
-								<p class="likes">1,012 likes</p>
-								<p class="description">
+								<p className="likes">1,012 likes</p>
+								<p className="description">
 									<span>username </span> {post.caption}
 								</p>
-								<p class="post-time">2 minutes ago</p>
+								<p className="post-time">2 minutes ago</p>
 							</div>
-							<div class="comment-wrapper">
-								<img src="img/smile.PNG" class="icon" alt="" />
-								<input type="text" class="comment-box" placeholder="Add a comment" />
-								<button class="comment-btn">post</button>
+							<div className="comment-wrapper">
+								<img src={require("../images/smile.png")} className="icon" alt="" />
+								<input type="text" className="comment-box" placeholder="Add a comment" />
+								<button className="comment-btn">post</button>
 							</div>
 						</div>
 					);

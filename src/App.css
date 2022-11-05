@@ -1,7 +1,27 @@
-body, #root, .containerApp { min-height: 100vh; }
 
-.containerApp { 
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*:focus{
+  outline: none;
+}
+
+body{
+  width: 100%;
+  background: #fafafa;
+  position: relative;
+  font-family: 'roboto', sans-serif;
+}
+
+/*.containerApp { 
   display: grid;
   grid-template-rows: 1fr 17fr 1fr;
   
-}
+}*/
+
+/*
+ body, #root, .containerApp { min-height: 100vh; }
+*/
